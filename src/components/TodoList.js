@@ -2,15 +2,14 @@ import React from 'react'
 import TodoItem from './TodoItem'
 
 function TodoList(props) {
-  const {
-    todos,
-    handleDelete,
-  } = props
+  const { todos, handleDelete } = props
+
+  const noItems = <div className="noItems">目前尚無定義工作事項！</div>
 
   return (
     <>
       <div className="todoItemWrap">
-        {todos.map((todoItem, i) => {
+        {todos.length ? (todos.map((todoItem, i) => {
           return (
             <TodoItem
               key={todoItem.id}
@@ -18,8 +17,10 @@ function TodoList(props) {
               handleDelete={handleDelete}
             />
           )
-        })}
+        })) : 
+        '' }
       </div>
+      {todos.length ? '' : noItems}
     </>
   )
 }

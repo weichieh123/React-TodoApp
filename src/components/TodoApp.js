@@ -33,7 +33,8 @@ function TodoApp() {
   // }
   const handleAddBtn = (e) => {
     e.preventDefault()
-    console.log('text: todoInput',todoInput)
+    console.log('todoInput',todoInput)
+    console.log('todos len',todos.length)
       const newTodoItem = {
         id: +new Date(),
         text: todoInput
