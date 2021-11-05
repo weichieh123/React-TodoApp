@@ -10,27 +10,19 @@ function TodoApp() {
   const [todos, setTodos] = useState([
     {
       id: 1,
-      text: 'Vue Router'
+      text: 'Vue Router',
+      completed: true,
+      edited: false,
     },
     {
       id: 2,
-      text: '學會Node.js，API不求人！讓你自在地遊走在前、後端程式語言與資訊安全'
+      text: '學會Node.js，API不求人！讓你自在地遊走在前、後端程式語言與資訊安全',
+      completed: false,
+      edited: false,
     },
   ])
 
   // 【 1-input框新增功能 】
-  // const handleAddNew = (e) => {
-  //   if (e.key === 'Enter') {
-  //     const newTodoItem = {
-  //       id: +new Date(),
-  //       text: e.target.value
-  //     }
-
-  //     const newTodos = [newTodoItem, ...todos]
-  //     setTodos(newTodos)
-  //     setTodoInput('')
-  //   }
-  // }
   const handleAddBtn = (e) => {
     e.preventDefault()
     console.log('todoInput',todoInput)
@@ -43,7 +35,6 @@ function TodoApp() {
       const newTodos = [newTodoItem, ...todos]
       setTodos(newTodos)
       setTodoInput('')
-    
   }
 
 
@@ -51,6 +42,56 @@ function TodoApp() {
   const handleDelete = (id) => {
     const newTodos = todos.filter((item) => item.id !== id)
     setTodos(newTodos)
+  }
+
+  // 【 3-勾選完成功能 】
+  const handleCompleted = (id) => {
+    const newTodos = [...todos]
+
+    const index = newTodos.findIndex(
+      (item) => item.id === id
+    )
+
+    if (index !== -1) {
+      newTodos[index].completed = !newTodos[index].completed
+      setTodos(newTodos)
+    }
+  }
+  // 【 4-1-編輯功能 】
+  // 先由目前的todos拷貝出一個新的陣列
+  // 利用id值找到對應的todo項目的索引值，用findIndex的作法
+  // 如果有找到就切換edited的true/false
+  // 設定回狀態值
+  const handleEdited = (id) => {
+
+    const newTodos = [...todos]
+    const index = newTodos.findIndex(
+      (item) => item.id === id
+    )
+
+    if (index !== -1) {
+      newTodos[index].edited = !newTodos[index].edited
+      setTodos(newTodos)
+    }
+  }
+
+  // 【 4-2-儲存功能 】
+  // 先由目前的todos拷貝出一個新的陣列
+  // 利用id值找到對應的todo項目的索引值，用findIndex的作法
+  // 如果有找到的話，把該項目的文字屬性改成新的
+  // 設定回原本的todos
+  // 儲存完之後，切換到原本的清單頁面狀態
+  const handleEditedSave = (id, text) => {
+    const newTodos = [...todos]
+    const index = newTodos.findIndex(
+      (item) => item.id === id
+    )
+
+    if (index !== -1) {
+      newTodos[index].text = text
+      setTodos(newTodos)
+      handleEdited(id)
+    }
   }
 
  
@@ -69,6 +110,9 @@ function TodoApp() {
       <TodoList
         todos={todos}
         handleDelete={handleDelete}
+        handleCompleted={handleCompleted}
+        handleEdited={handleEdited}
+        handleEditedSave={handleEditedSave}
       />
       </div>
     </>

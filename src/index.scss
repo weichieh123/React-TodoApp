@@ -44,6 +44,33 @@ h1 {
   background-color: #17a2b8;
   border-color: #17a2b8;
 }
+.saveBtn {
+  width: 50px;
+  height: 30px;
+  margin: 10px 0;
+  border: none;
+  background-color: rgb(255, 186, 186);
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+}
+.cancelBtn {
+  width: 50px;
+  height: 30px;
+  margin: 10px 0;
+  border: none;
+  background-color: #999;
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+}
+.editBtn {
+  width: 50px;
+  height: 30px;
+  margin: 10px 0;
+  border: none;
+  background-color: #eee;
+  color: #999;
+  font-size: 15px;
+}
 .delBtn {
   width: 30px;
   height: 30px;
